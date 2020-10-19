@@ -1,4 +1,5 @@
 input='tracked_files.txt'
 while read line; do
-    cp "$HOME/$line" ./
+    echo "$HOME/"$(echo "$line")
+    rsync -rv "$HOME/"$(echo "$line") ./
 done < $input
