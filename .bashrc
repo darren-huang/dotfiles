@@ -106,6 +106,7 @@ export VISUAL=vim
 export EDITOR="$VISUAL"
 set -o vi 
 
+alias tmux='tmux -2'
 alias tmuxn='tmux new-session -s $$'
 _trap_exit() { tmux kill-session -t $$; }
 trap _trap_exit EXIT
@@ -120,7 +121,13 @@ trash() {
     mv $1 ~/trash 
 }
 
-alias cdindexlab="cd /c/Projects/python/labs/intro_python/skill_checking_labs/index_card_holder"
-alias cdproj="cd /c/Projects"
 export PATH=~/.local/bin:$PATH
 alias dc=docker-compose
+
+# --- Machine Specific --- (don't copy and paste this part)
+alias cdindexlab="cd /c/Projects/python/labs/intro_python/skill_checking_labs/index_card_holder"
+alias cdproj="cd /c/Projects"
+alias cddld=="cd /c/Users/HuangDarren/Downloads"
+PROJ="/c/Projects"
+DLD="/c/Users/HuangDarren/Downloads"
+# ---

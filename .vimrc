@@ -18,3 +18,7 @@ set shiftwidth=4
 set statusline+=%F " see the current file name
 set ruler
 set showcmd
+
+nnoremap <F2> :set invpaste paste?<CR>
+set pastetoggle=<F2>
+set showmode

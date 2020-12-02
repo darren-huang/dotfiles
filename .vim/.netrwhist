@@ -1,4 +1,8 @@
 let g:netrw_dirhistmax  =10
-let g:netrw_dirhist_cnt =2
+let g:netrw_dirhist_cnt =6
 let g:netrw_dirhist_1='/c/Projects/python/labs'
 let g:netrw_dirhist_2='/c/Projects/python/labs/candies'
+let g:netrw_dirhist_3='/home/dhuang249'
+let g:netrw_dirhist_4='/home/dhuang249/bb_dotfiles'
+let g:netrw_dirhist_5='/home/dhuang249'
+let g:netrw_dirhist_6='/home'

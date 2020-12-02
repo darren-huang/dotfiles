@@ -2,3 +2,4 @@
 .vimrc
 .tmux.conf
 .vim --exclude .git --exclude .gitignore
+.inputrc
