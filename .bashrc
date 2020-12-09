@@ -124,10 +124,7 @@ trash() {
 export PATH=~/.local/bin:$PATH
 alias dc=docker-compose
 
-# --- Machine Specific --- (don't copy and paste this part)
-alias cdindexlab="cd /c/Projects/python/labs/intro_python/skill_checking_labs/index_card_holder"
-alias cdproj="cd /c/Projects"
-alias cddld=="cd /c/Users/HuangDarren/Downloads"
-PROJ="/c/Projects"
-DLD="/c/Users/HuangDarren/Downloads"
-# ---
+# Load machine specific bashrc
+if [ -f ~/.bashrc.local ]; then
+    source ~/.bashrc.local
+fi
