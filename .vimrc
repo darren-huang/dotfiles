@@ -44,11 +44,11 @@ set shiftwidth=4
 set statusline+=%F " see the current file name
 set ruler
 set showcmd
+set viminfo='100,f1
 
 " Settings for paste mode
 nnoremap <F2> :set invpaste paste?<CR>
 set pastetoggle=<F2>
-set showmode
 
 " Settings for panel naviagation
 map <C-J> <C-W>j
