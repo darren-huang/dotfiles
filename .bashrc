@@ -128,3 +128,6 @@ alias dc=docker-compose
 if [ -f ~/.bashrc.local ]; then
     source ~/.bashrc.local
 fi
+
+# colors stuff
+export TERM=xterm-256color

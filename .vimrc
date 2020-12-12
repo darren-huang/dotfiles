@@ -1,11 +1,37 @@
+" -------- Plugins ------------------------------------------------------
+
+" vim-plug stuff
+call plug#begin('~/.vim/plugged')
+Plug 'vim-scripts/c.vim'
+Plug 'preservim/nerdtree'
+Plug 'itchyny/lightline.vim'
+Plug 'frazrepo/vim-rainbow'
+Plug 'dracula/vim', { 'as': 'dracula' }
+call plug#end()
+
+" -------- Visuals ------------------------------------------------------
+
+" lightlihgt stuff
+set laststatus=2
+let g:lightline = {'colorscheme': 'dracula'}
+if !has('gui_running')
+  set t_Co=256
+endif
+set noshowmode
+
+" dracula stuff
+if (has("termguicolors"))
+    let &t_8f = "\<Esc>[38;2;%lu;%lu;%lum"
+    let &t_8b = "\<Esc>[48;2;%lu;%lu;%lum"
+    set termguicolors
+endif
+colorscheme dracula
 let g:dracula_italic = 0
 
-packadd! dracula
-syntax enable
-colorscheme dracula
-set number
+" -------- Vim Settings ----------------------------------------------------
 
-syntax on " Syntax highlighting
+set number
+syntax enable " Syntax highlighting
 set showmatch " Shows matching brackets
 set ruler " Always shows location in file (line#)
 set smarttab " Autotabs for certain code
@@ -29,3 +55,4 @@ map <C-J> <C-W>j
 map <C-K> <C-W>k
 nmap <C-H> <C-W>h
 nmap <C-L> <C-W>l
+
