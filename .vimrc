@@ -7,6 +7,7 @@ Plug 'preservim/nerdtree'
 Plug 'itchyny/lightline.vim'
 Plug 'frazrepo/vim-rainbow'
 Plug 'dracula/vim', { 'as': 'dracula' }
+Plug 'vim-syntastic/syntastic'
 call plug#end()
 
 " -------- Visuals ------------------------------------------------------
@@ -27,6 +28,17 @@ if (has("termguicolors"))
 endif
 colorscheme dracula
 let g:dracula_italic = 0
+
+" syntastic stuff
+let g:syntastic_enable_highlighting=1
+let g:syntastic_enable_signs=1
+set statusline+=%#warningmsg#
+set statusline+=%{SyntasticStatuslineFlag()}
+set statusline+=%*
+
+let g:syntastic_always_populate_loc_list = 1
+let g:syntastic_auto_loc_list = 0
+let g:syntastic_check_on_open = 1
 
 " -------- Vim Settings ----------------------------------------------------
 
