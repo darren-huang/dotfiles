@@ -61,10 +61,3 @@ set viminfo='100,f1
 " Settings for paste mode
 nnoremap <F2> :set invpaste paste?<CR>
 set pastetoggle=<F2>
-
-" Settings for panel naviagation
-map <C-J> <C-W>j
-map <C-K> <C-W>k
-nmap <C-H> <C-W>h
-nmap <C-L> <C-W>l
-
