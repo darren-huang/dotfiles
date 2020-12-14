@@ -2,12 +2,11 @@
 
 " vim-plug stuff
 call plug#begin('~/.vim/plugged')
-Plug 'vim-scripts/c.vim'
 Plug 'preservim/nerdtree'
 Plug 'itchyny/lightline.vim'
-Plug 'frazrepo/vim-rainbow'
 Plug 'dracula/vim', { 'as': 'dracula' }
 Plug 'dense-analysis/ale'
+Plug 'airblade/vim-gitgutter'
 call plug#end()
 
 " -------- Visuals ------------------------------------------------------
@@ -49,6 +48,3 @@ set ruler
 set showcmd
 set viminfo='100,f1
 
-" Settings for paste mode
-nnoremap <F2> :set invpaste paste?<CR>
-set pastetoggle=<F2>

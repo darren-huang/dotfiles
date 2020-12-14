@@ -12,8 +12,17 @@ nmap <C-O> <C-W>4<
 nmap <C-I> <C-W>+
 nmap <C-U> <C-W>-
 nmap <C-E> <C-W>=
-nmap <C-F> <C-W>_<C-W>|
+nmap <C-F> <C-W>_<C-W>\|
+
+" Settings for paste mode
+nnoremap <F2> :set invpaste paste?<CR>
+set pastetoggle=<F2>
 
 " NERDTree
 nmap <C-n> :NERDTreeToggle<CR>
 
+" ALE
+nmap <F3> :ALEToggle<CR>
+
+" Git-Gutter
+nmap <F4> :GitGutterToggle<CR>
