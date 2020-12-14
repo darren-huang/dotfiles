@@ -7,10 +7,10 @@ nmap <C-L> <C-W>l
 nmap <C-W>r <C-W>v<C-W>l
 nmap <C-W>d <C-W>s<C-W>j
 " Panel Resizing
-nmap <C-P> <C-W>4>
-nmap <C-O> <C-W>4<
-nmap <C-I> <C-W>+
-nmap <C-U> <C-W>-
+nmap <F12> <C-W>4>
+nmap <F11> <C-W>4<
+nmap <F10> <C-W>+
+nmap <F9> <C-W>-
 nmap <C-E> <C-W>=
 nmap <C-F> <C-W>_<C-W>\|
 
