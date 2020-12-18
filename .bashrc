@@ -131,3 +131,6 @@ fi
 
 # colors stuff
 export TERM=xterm-256color
+
+# git stuff
+alias gitlg="git log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit"
