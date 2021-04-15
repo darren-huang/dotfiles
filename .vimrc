@@ -7,6 +7,7 @@ Plug 'itchyny/lightline.vim'
 Plug 'dracula/vim', { 'as': 'dracula' }
 Plug 'dense-analysis/ale'
 Plug 'airblade/vim-gitgutter'
+Plug 'mhinz/vim-startify'
 call plug#end()
 
 " -------- Visuals ------------------------------------------------------
@@ -15,11 +16,19 @@ set t_Cs=
 
 " lightlihgt stuff
 set laststatus=2
-let g:lightline = {'colorscheme': 'dracula'}
+let g:lightline = {
+    \   'colorscheme': 'dracula', 
+    \   'component_function': {'filename': 'FilenameForLightline'}
+    \}
 if !has('gui_running')
   set t_Co=256
 endif
 set noshowmode
+
+" Show full path of filename
+function! FilenameForLightline()
+    return expand('%')
+endfunction
 
 " dracula stuff
 if (has("termguicolors"))
