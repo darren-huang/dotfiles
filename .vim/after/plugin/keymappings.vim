@@ -26,3 +26,6 @@ nmap <F3> :ALEToggle<CR>
 
 " Git-Gutter
 nmap <F4> :GitGutterToggle<CR>
+
+" StartifySave
+nmap <F5> :SSave!<CR>

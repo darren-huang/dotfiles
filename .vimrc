@@ -56,4 +56,3 @@ set statusline+=%F " see the current file name
 set ruler
 set showcmd
 set viminfo='100,f1
-
