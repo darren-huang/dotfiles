@@ -3,5 +3,5 @@ while read line; do
     mkdir -p ./old_home_dotfiles
     echo "./"$(echo "$line")
     rsync -av "$HOME/"$(echo "$line") ./old_home_dotfiles
-    rsync -av --relative "./"$(echo "$line") ~/
+    rsync -avR --relative $(echo "$line") ~/
 done < $input
