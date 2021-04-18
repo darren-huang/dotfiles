@@ -1,7 +1,7 @@
 # Personal Dotfiles
 
 ## WSL 2 (windows)
-1 Follow this [guide](https://docs.microsoft.com/en-us/windows/wsl/install-win10) in order to install WSL 2.
+1. Follow this [guide](https://docs.microsoft.com/en-us/windows/wsl/install-win10) in order to install WSL 2.
 
 2. go to the `windows_terminal_settings` and then copy over the necessary parts
 
