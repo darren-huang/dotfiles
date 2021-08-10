@@ -111,7 +111,7 @@ alias tmuxn='tmux new-session -s $$'
 _trap_exit() { tmux kill-session -t $$; }
 trap _trap_exit EXIT
 
-if [ -z "$TMUX" ]
+if [[ -z "$TMUX" ]]
 then
     tmuxn
 fi
@@ -135,3 +135,17 @@ export TERM=xterm-256color
 # git stuff
 alias gitlgu="git log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit"
 alias gitlg="git log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %Creset' --abbrev-commit"
+
+# vscode annoyance
+alias sshserver="sudo service ssh start"
+
+alias chownme="sudo chown -R $(whoami) .*"
+
+# get latest log
+function latestlog() {
+    if [ "$#" -eq 1 ]; then
+        echo "$1""/$(ls -At $1 | head -n 1)"
+    else
+        echo "$(ls -At $@ | head -n 1)"
+    fi
+}
