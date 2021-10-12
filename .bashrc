@@ -149,3 +149,13 @@ function latestlog() {
         echo "$(ls -At $@ | head -n 1)"
     fi
 }
+
+function kubeconfigdev() {
+    mv ~/.kube/config ~/.kube/config.old
+    cp ~/.kube/config.dev ~/.kube/config
+}
+
+function kubeconfigbuild() {
+    mv ~/.kube/config ~/.kube/config.old
+    cp ~/.kube/config.build ~/.kube/config
+}
