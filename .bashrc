@@ -159,3 +159,5 @@ function kubeconfigbuild() {
     mv ~/.kube/config ~/.kube/config.old
     cp ~/.kube/config.build ~/.kube/config
 }
+
+alias sourcevenv="source .venv/bin/activate"
