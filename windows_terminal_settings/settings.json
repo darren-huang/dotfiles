@@ -57,7 +57,8 @@
                 "hidden": false,
                 "name": "Ubuntu-18.04",
                 "source": "Windows.Terminal.Wsl",
-                "startingDirectory": "C:\\Projects",
+                "startingDirectory": "//wsl$/Ubuntu/home/darrenyhuang",
+                //"startingDirectory": "//wsl$/Ubuntu-18.04/home/darrenyhuang",
                 "colorScheme": "Dracula",
                 "padding":"0, 0, 0, 0",
                 "scrollbarState":"hidden"
