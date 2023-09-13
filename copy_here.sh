@@ -7,18 +7,18 @@ fi;
 
 # define vars
 cwd=$(pwd)
-shared_dir=$cwd"/configs/shared"
-windows_dir=$cwd"/configs/windows"
-macos_dir=$cwd"/configs/macos"
+shared_dir="${cwd}/configs/shared"
+windows_dir="${cwd}/configs/windows"
+macos_dir="${cwd}/configs/macos"
 
 process_dir() {
     target_dir=$1
-    configs_txt=$target_dir"/load_order.txt"
+    configs_txt="${target_dir}/load_order.txt"
     cd $target_dir
 
     while read config; do
-        echo "$HOME/"$(echo "$config")
-        rsync -av --relative "$HOME/./"$(echo "$config") ./
+        echo "${HOME}/${config}"
+        rsync -av --relative "${HOME}/./${config}" ./
         echo "\n\n"
     done < $configs_txt
 }
