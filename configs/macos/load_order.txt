@@ -1,3 +1,2 @@
-.bashrc
-.bashrc.local
+.zshrc
 .tmux.conf
