@@ -14,6 +14,7 @@ macos_dir=$cwd"/configs/macos"
 process_dir() {
     target_dir=$1
     configs_txt=$target_dir"/load_order.txt"
+    cd $target_dir
 
     while read config; do
         mkdir -p ./old_home_dotfiles
