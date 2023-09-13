@@ -1,5 +1,5 @@
 # validate arguments
-if [[ $# -ne 1 || ( $1 -ne "macos" && $1 -ne "windows" ) ]]; then
+if [[ $# -ne 1 || ( "$1" != "macos" && "$1" != "windows" ) ]]; then
     echo "usage:"
     echo "OVERWRITE_HOME.sh [windows|macos]"
     return 1
@@ -21,9 +21,10 @@ process_dir() {
         echo "./"$(echo "$config")
         rsync -av "$HOME/"$(echo "$config") ./old_home_dotfiles
         rsync -avR --relative $(echo "$config") ~/
+        echo "\n\n"
     done < $configs_txt
 }
 
 process_dir "$shared_dir"
-if [[ $1 -eq "windows "]]; then; process_dir "$windows_dir"; fi;
-if [[ $1 -eq "macos"]]; then; process_dir "$macos_dir"; fi;
+if [[ "$1" == "windows" ]]; then process_dir "$windows_dir"; fi;
+if [[ "$1" == "macos" ]]; then process_dir "$macos_dir"; fi;
