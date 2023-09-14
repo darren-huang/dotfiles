@@ -71,3 +71,23 @@ function kubeconfigbuild() {
 }
 
 alias sourcevenv="source .venv/bin/activate"
+
+# The next line updates PATH for the Google Cloud SDK.
+if [ -f '/Users/dhuang5/Install/google-cloud-sdk/path.zsh.inc' ]; then . '/Users/dhuang5/Install/google-cloud-sdk/path.zsh.inc'; fi
+
+# The next line enables shell command completion for gcloud.
+if [ -f '/Users/dhuang5/Install/google-cloud-sdk/completion.zsh.inc' ]; then . '/Users/dhuang5/Install/google-cloud-sdk/completion.zsh.inc'; fi
+export PATH="/opt/homebrew/opt/openjdk/bin:$PATH"
+
+# PS1 - modifies the prompt
+function parse_git_branch() {
+    # Parse the current git branch name and print it
+    which git &>/dev/null || return
+    local branch=$(git branch 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/\1/')
+    [[ -n $branch ]] && echo " [${branch}]"
+}
+setopt PROMPT_SUBST
+autoload -U colors && colors
+PS1=$'
+%{\e[1;33m%}%D{%b-%d %H:%M:%S}%{\e[0m%} %{\e[1;35m%}%d%{\e[0m%}$(parse_git_branch)
+%{\e[1;36m%}[%n.%m]%{\e[0m%} %% '
