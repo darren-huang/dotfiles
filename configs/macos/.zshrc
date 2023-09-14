@@ -89,34 +89,36 @@ function parse_git_branch() {
 setopt PROMPT_SUBST
 autoload -U colors && colors
 
-base_PS1=$'
-%{\e[1;33m%}%D{%b-%d %H:%M:%S}%{\e[0m%} %{\e[1;35m%}%d%{\e[0m%}$(parse_git_branch)
-%{\e[1;36m%}[%n.%m]%{\e[0m%}'
+PS1_0=$'\n'
+PS1_1=$'%{\e[1;33m%}%D{%b-%d %H:%M:%S}%{\e[0m%} %{\e[1;35m%}%d%{\e[0m%}$(parse_git_branch)\n'
+PS1_2=$'%{\e[1;36m%}[%n.%m]%{\e[0m%}'
+base_PS1=$PS1_0$PS1_1$PS1_2
 tail_PS1=' %% '
-# VIM_CMD_PROMPT="%{$fg_bold[red]%}[% cmd]% %{$reset_color%}"
-# VIM_INS_PROMPT="%{$fg_bold[green]%}[% ins]% %{$reset_color%}"
-# CMD_OR_INS="${${KEYMAP/vicmd/$VIM_CMD_PROMPT}/(main|viins)/$VIM_INS_PROMPT}"
+VIM_CMD_PROMPT="%{$fg_bold[red]%}[% cmd]% %{$reset_color%}"
+VIM_INS_PROMPT="%{$fg_bold[green]%}[% ins]% %{$reset_color%}"
 
 # PS1 insert command or insert mode
-# function set-ps1 {
-#     CMD_OR_INS="${${KEYMAP/vicmd/$VIM_CMD_PROMPT}/(main|viins)/$VIM_INS_PROMPT}"
-# }
-# function zle-keymap-select {
-#     set-ps1
-#    zle reset-prompt
-#}
-#function zle-line-finish {
-#    set-ps1
-#}
-#PS1='${base_PS1}${CMD_OR_INS}${tail_PS1}'
-#PS1='$base_PS1$CMD_OR_INS$tail_PS1'
-#RPS1=""
-#RPS2=""
-
-# zle -N zle-line-init
-#zle -N zle-keymap-select
-#zle -N zle-line-finish
-PS1=$base_PS1$tail_PS1
+function repeat_char {
+    local input="$1"
+    local count="$2"
+    printf -v myString '%*s' "$count"
+    printf '%s\n' "${myString// /$input}"
+}
+function count_prompt_len {
+    local zero='%([BSUbfksu]|([FK]|){*})'
+    echo ${#${(S%%)1//$~zero/}}
+}
+function zle-line-init zle-keymap-select {
+    CMD_OR_INS="${${KEYMAP/vicmd/$VIM_CMD_PROMPT}/(main|viins)/$VIM_INS_PROMPT}"
+    PS1=${base_PS1}${CMD_OR_INS}${tail_PS1}
+    ps1_2_spaced=$(repeat_char " " $(count_prompt_len $PS1_2))
+    PS2="$ps1_2_spaced     $tail_PS1"
+    RPS1=""
+    RPS2=""
+    zle reset-prompt
+}
+zle -N zle-line-init
+zle -N zle-keymap-select
 
 # Reverse command search
 bindkey -v
