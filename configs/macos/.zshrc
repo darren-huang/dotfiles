@@ -107,3 +107,7 @@ function zle-line-init zle-keymap-select {
 }
 zle -N zle-line-init
 zle -N zle-keymap-select
+
+# Reverse command search
+bindkey -v
+bindkey '^R' history-incremental-search-backward
