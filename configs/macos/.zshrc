@@ -86,6 +86,13 @@ function parse_git_branch() {
     local branch=$(git branch 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/\1/')
     [[ -n $branch ]] && echo " [${branch}]"
 }
+function virtualenv_info {
+    [ $VIRTUAL_ENV ] && echo '('`basename $VIRTUAL_ENV`') '
+}
+function get_cpu_arch {
+    ([[ "$(arch)" = 'arm64' ]] && echo "") || \
+        ([[ "$(arch)" = 'i386' ]] && echo "<intel> ")
+}
 setopt PROMPT_SUBST
 autoload -U colors && colors
 
@@ -93,7 +100,7 @@ PS1_0=$'\n'
 PS1_1=$'%{\e[1;33m%}%D{%b-%d %H:%M:%S}%{\e[0m%} %{\e[1;35m%}%d%{\e[0m%}$(parse_git_branch)\n'
 PS1_2=$'%{\e[1;36m%}[%n.%m]%{\e[0m%}'
 base_PS1=$PS1_0$PS1_1$PS1_2
-tail_PS1=' %% '
+tail_PS1=' $(virtualenv_info)$(get_cpu_arch)%% '
 VIM_CMD_PROMPT="%{$fg_bold[red]%}[% cmd]% %{$reset_color%}"
 VIM_INS_PROMPT="%{$fg_bold[green]%}[% ins]% %{$reset_color%}"
 
@@ -123,3 +130,28 @@ zle -N zle-keymap-select
 # Reverse command search
 bindkey -v
 bindkey '^R' history-incremental-search-backward
+
+# pyenv setup
+export PYENV_ROOT="$HOME/.pyenv"
+command -v pyenv >/dev/null || export PATH="$PYENV_ROOT/bin:$PATH"
+eval "$(pyenv init -)"
+export PYENV_VIRTUALENV_DISABLE_PROMPT=1
+
+# snap access alias
+alias awsnap="snapaccess credentials refresh"
+alias ausnap="snapaccess credentials refresh"
+
+# code folder locations
+alias cdsnap="cd ~/src/snap/snapchat"
+alias cdflow="cd ~/src/snap/flowrida"
+alias cdflow2="cd ~/src/snap/flowrida/v2"
+alias cdpia="cd ~/src/snap/snapchat/targeting/identitygraph/src/main/python/analysis/pixel-ip-agg-model"
+alias cdtiam="cd ~/src/snap/snapchat/applications/tiam_ml"
+
+# fix command line vi-editing mode backspace
+bindkey -v '^?' backward-delete-char
+
+# alias to set architecture
+alias intel="env /usr/bin/arch -x86_64 /bin/zsh --login"
+alias arm="env /usr/bin/arch -arm64 /bin/zsh --login"
+alias brew86='/usr/local/bin/brew'
