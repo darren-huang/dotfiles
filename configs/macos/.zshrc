@@ -205,3 +205,13 @@ function runlog() {
     echo "<<<runlog end" >> $logfile
 }
 
+# save current pane to file
+function savepane() {
+        if [[ $# -ne 1 ]] ; then
+                echo "USAGE:"
+                echo "savepane [filename]"
+                return 1
+        fi
+        tmux capture-pane -pS - >> "${HOME}/terminal_logs/tmux/${1}"
+}
+
