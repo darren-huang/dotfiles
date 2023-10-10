@@ -204,7 +204,7 @@ function runlog() {
     echo ">>>runlog start" >> $logfile
     echo "# command: $@" >> $logfile
     echo "# output:" >> $logfile
-    ${pos_args[@]} | tee -a $logfile
+    ${pos_args[@]} 2>&1 | tee -a $logfile
     echo "<<<runlog end" >> $logfile
 }
 
