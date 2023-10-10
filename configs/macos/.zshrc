@@ -169,10 +169,13 @@ function runlog() {
         echo "default filename is 'script'.txt"
     }
 
-
     # setup variables
+    local OPTIND f filename logs_dir pos_args; OPTIND=1
     pos_args=()
-    local OPTIND f filename; OPTIND=1
+
+    # setup logs directory
+    logs_dir="${HOME}/terminal_logs/runlog"
+    mkdir -p $logs_dir
 
     # process flags
     while [ $OPTIND -le "$#" ]; do
@@ -193,7 +196,7 @@ function runlog() {
     # notify user
     if [[ ! $filename ]]; then filename=${pos_args[1]}; fi
     date_suffix="$(date +"%Y-%m-%d_%H%M%S")"
-    logfile="$HOME/terminal_logs/runlog/${filename}_${date_suffix}.txt"
+    logfile="${logs_dir}/${filename}_${date_suffix}.txt"
     echo "running command:  ${pos_args[@]}"
     echo "saving output to: ${logfile}"
 
