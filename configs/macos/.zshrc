@@ -155,3 +155,53 @@ bindkey -v '^?' backward-delete-char
 alias intel="env /usr/bin/arch -x86_64 /bin/zsh --login"
 alias arm="env /usr/bin/arch -arm64 /bin/zsh --login"
 alias brew86='/usr/local/bin/brew'
+
+# alias for ssh stuffs
+alias rsynctiam="rsync -az -e 'ssh -o LogLevel=quiet -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null' /Users/dhuang5/src/snap/snapchat/applications/tiam_ml/ dhuang5@estimated-conversions-dev.sc-targeting-measurement.snapint:src/tiam_ml"
+alias sshec="ssh estimated-conversions-dev.sc-targeting-measurement.snapint"
+
+# function for running a command and tee-ing the output to a file
+function runlog() {
+    # usage notif
+    function usage_notif() {
+        echo "USAGE:"
+        echo "runlog [-f filename (no ext)] script arg1 arg2 arg3 ..."
+        echo "default filename is 'script'.txt"
+    }
+
+
+    # setup variables
+    pos_args=()
+    local OPTIND f filename; OPTIND=1
+
+    # process flags
+    while [ $OPTIND -le "$#" ]; do
+    if getopts "hf:" option; then
+        case $option in
+            f) filename="$OPTARG";;
+            *) usage_notif; return 1;;
+        esac
+    else
+        pos_args+=("${@[OPTIND]}")
+        ((OPTIND++))
+    fi
+    done
+
+    # check num of pos_args
+    if [[ ${#pos_args} -eq 0 ]]; then usage_notif; return 1; fi
+
+    # notify user
+    if [[ ! $filename ]]; then filename=${pos_args[1]}; fi
+    date_suffix="$(date +"%Y-%m-%d_%H%M%S")"
+    logfile="$HOME/terminal_logs/runlog/${filename}_${date_suffix}.txt"
+    echo "running command:  ${pos_args[@]}"
+    echo "saving output to: ${logfile}"
+
+    # run command & log to file
+    echo ">>>runlog start" >> $logfile
+    echo "# command: $@" >> $logfile
+    echo "# output:" >> $logfile
+    ${pos_args[@]} | tee -a $logfile
+    echo "<<<runlog end" >> $logfile
+}
+
