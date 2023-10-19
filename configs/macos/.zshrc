@@ -204,7 +204,9 @@ function runlog() {
     echo ">>>runlog start" >> $logfile
     echo "# command: $@" >> $logfile
     echo "# output:" >> $logfile
+    set -o pipefail # if any fail, pipeline fails
     ${pos_args[@]} 2>&1 | tee -a $logfile
+    set +o pipefail # pipeline fails with rightmost
     echo "<<<runlog end" >> $logfile
 }
 
@@ -217,4 +219,5 @@ function savepane() {
         fi
         tmux capture-pane -pS - >> "${HOME}/terminal_logs/tmux/${1}"
 }
+
 
