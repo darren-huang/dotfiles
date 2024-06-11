@@ -129,7 +129,9 @@ zle -N zle-keymap-select
 
 # Reverse command search
 bindkey -v
-bindkey '^R' history-incremental-search-backward
+bindkey '^R' history-incremental-pattern-search-backward
+bindkey '^S' history-incremental-pattern-search-forward
+stty -ixon
 
 # pyenv setup
 export PYENV_ROOT="$HOME/.pyenv"
@@ -221,3 +223,8 @@ function savepane() {
 }
 
 
+# set javahome
+export JAVA_HOME=`/usr/libexec/java_home -v 1.8.0_181`
+
+# set PATH
+export PATH=$PATH:/Users/dhuang5/bin
