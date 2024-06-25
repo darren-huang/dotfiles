@@ -13,9 +13,9 @@ set -o ignoreeof  # Don't close the shell if we accidentally hit Ctrl+D
 
 # The "Locale" deals with language internationalization. Best to get that set
 # explicitly:
-export LC_ALL=en_US.UTF-8
-export LANG=en_US.UTF-8
-export LANGUAGE=en_US.UTF-8
+# export LC_ALL=en_US.UTF-8
+# export LANG=en_US.UTF-8
+# export LANGUAGE=en_US.UTF-8
 
 # Don't put duplicate command-lines in the history, and if a command-lines
 # starts with space, don't add it to history:
