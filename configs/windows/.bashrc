@@ -161,3 +161,64 @@ function kubeconfigbuild() {
 }
 
 alias sourcevenv="source .venv/bin/activate"
+
+# function for running a command and tee-ing the output to a file
+function runlog() {
+    # usage notif
+    function usage_notif() {
+        echo "USAGE:"
+        echo "runlog [-f filename (no ext)] script arg1 arg2 arg3 ..."
+        echo "default filename is 'script'.txt"
+    }
+
+    # setup variables
+    local OPTIND f filename logs_dir pos_args; OPTIND=1
+    pos_args=()
+
+    # setup logs directory
+    logs_dir="${HOME}/terminal_logs/runlog"
+    mkdir -p $logs_dir
+
+    # process flags
+    while [ $OPTIND -le "$#" ]; do
+    if getopts "hf:" option; then
+        case $option in
+            f) filename="$OPTARG";;
+            *) usage_notif; return 1;;
+        esac
+    else
+        pos_args+=("${@[OPTIND]}")
+        ((OPTIND++))
+    fi
+    done
+
+    # check num of pos_args
+    if [[ ${#pos_args} -eq 0 ]]; then usage_notif; return 1; fi
+
+    # notify user
+    if [[ ! $filename ]]; then filename=${pos_args[1]}; fi
+    date_suffix="$(date +"%Y-%m-%d_%H%M%S")"
+    logfile="${logs_dir}/${filename}_${date_suffix}.txt"
+    echo "running command:  ${pos_args[@]}"
+    echo "saving output to: ${logfile}"
+
+    # run command & log to file
+    echo ">>>runlog start" >> $logfile
+    echo "# command: $@" >> $logfile
+    echo "# output:" >> $logfile
+    set -o pipefail # if any fail, pipeline fails
+    ${pos_args[@]} 2>&1 | tee -a $logfile
+    set +o pipefail # pipeline fails with rightmost
+    echo "<<<runlog end" >> $logfile
+}
+
+# save current pane to file
+function savepane() {
+        if [[ $# -ne 1 ]] ; then
+                echo "USAGE:"
+                echo "savepane [filename]"
+                return 1
+        fi
+        tmux capture-pane -pS - >> "${HOME}/terminal_logs/tmux/${1}"
+}
+
