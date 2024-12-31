@@ -18,7 +18,7 @@ process_dir() {
 
     while read config; do
         echo "${HOME}/${config}"
-        rsync -av --relative "${HOME}/./${config}" ./
+        rsync -av --relative --no-implied-dirs "${HOME}/./${config}" ./
         echo "\n\n"
     done < $configs_txt
 }

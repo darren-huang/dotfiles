@@ -1,5 +1,8 @@
 # ~/.zshrc
 
+# add brew to the path
+export PATH=/opt/homebrew/bin:$PATH
+
 # You can change to parent director(ies) with "cd ../../..", but typing
 # all of those dots is exactly the sort of meaningless work that you hate:
 alias .1='cd ..'
