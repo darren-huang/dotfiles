@@ -1,6 +1,0 @@
-# --- Machine Specific --- (don't copy and paste this part)
-# DARN="/mnt/c/Users/darre"
-# DLD="/mnt/c/Users/darre/Downloads"
-# alias cddarn=="cd $DARN"
-# alias cddld=="cd $DLD"
-# ---
