@@ -1,21 +1,20 @@
 # ~/.bashrc
-# vim: filetype=sh :
+
+# Load zsh and bash shared configuration
+if [ -f ~/.shared_shrc.sh ]; then
+    source ~/.shared_shrc.sh
+fi
+
+# Load machine specific bashrc
+if [ -f ~/.bashrc.local ]; then
+    source ~/.bashrc.local
+fi
 
 # Load the original .bashrc if it exists:
 [[ -f ~/.bashrc-orig ]] && source  ~/.bashrc-orig
 
-# Attention vim users:  un-comment this when you want to switch
-# the readline key map to `vi` mode instead of the default (emacs --> hiss...!)
-# set -o vi
-
 umask 0022  # Turn off write permissions for group+others when creating new files
 set -o ignoreeof  # Don't close the shell if we accidentally hit Ctrl+D
-
-# The "Locale" deals with language internationalization. Best to get that set
-# explicitly:
-# export LC_ALL=en_US.UTF-8
-# export LANG=en_US.UTF-8
-# export LANGUAGE=en_US.UTF-8
 
 # Don't put duplicate command-lines in the history, and if a command-lines
 # starts with space, don't add it to history:
@@ -36,7 +35,6 @@ shopt -s histverify
 # is entered on a sluggish terminal, vs. the desire to find very-old
 # command lines.  It's not really about disk space or memory consumption.
 HISTSIZE=1000
-
 
 # Assuming 'dircolors' is available, define an alias for 'ls' which colorizes
 # directory listings:
@@ -102,15 +100,18 @@ function set_PS1 {
 
 set_PS1  # Set the prompt to something more useful than the default
 
+# set the cmdline editor to use vim
 export VISUAL=vim
 export EDITOR="$VISUAL"
 set -o vi 
 
+# tmux settings
 alias tmux='tmux -2'
 alias tmuxn='tmux new-session -s $$'
 _trap_exit() { tmux kill-session -t $$; }
 trap _trap_exit EXIT
 
+# start the tmux session if not already in one
 if [[ -z "$TMUX" ]]
 then
     tmuxn
@@ -123,11 +124,6 @@ trash() {
 
 export PATH=~/.local/bin:$PATH
 alias dc=docker-compose
-
-# Load machine specific bashrc
-if [ -f ~/.bashrc.local ]; then
-    source ~/.bashrc.local
-fi
 
 # colors stuff
 export TERM=xterm-256color

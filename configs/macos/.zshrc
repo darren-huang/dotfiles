@@ -1,5 +1,15 @@
 # ~/.zshrc
 
+# Load zsh and bash shared configuration
+if [ -f ~/.shared_shrc.sh ]; then
+    source ~/.shared_shrc.sh
+fi
+
+# Load machine specific bashrc
+if [ -f ~/.zshrc.local ]; then
+    source ~/.zshrc.local
+fi
+
 # add brew to the path
 export PATH=/opt/homebrew/bin:$PATH
 
@@ -34,11 +44,6 @@ trash() {
 
 export PATH=~/.local/bin:$PATH
 alias dc=docker-compose
-
-# Load machine specific bashrc
-if [ -f ~/.bashrc.local ]; then
-    source ~/.bashrc.local
-fi
 
 # colors stuff
 export TERM=xterm-256color

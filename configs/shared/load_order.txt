@@ -1,3 +1,4 @@
+.shared_shrc.sh
 .inputrc
 .vimrc
 .vim/after/plugin/keymappings.vim
