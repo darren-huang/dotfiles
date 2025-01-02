@@ -48,16 +48,16 @@ myenv_py-ver() {
         return 1
     fi
 
-    echo "$1" > .pythonversion
+    pyenv local "$1"
 }
 
 myenv_create() {
-    if [ ! -f ".pythonversion" ]; then
-        echo ".pythonversion file not found. Please set the Python version using 'myenv py-ver <python_version>'."
+    if [ ! -f ".python-version" ]; then
+        echo ".python-version file not found. Please set the Python version using 'myenv py-ver <python_version>'."
         return 1
     fi
 
-    python_version=$(cat .pythonversion)
+    python_version=$(cat .python-version)
 
     if pyenv versions | grep -q "$python_version"; then
         pyenv local "$python_version"
