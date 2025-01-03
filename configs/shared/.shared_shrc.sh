@@ -33,6 +33,7 @@ myenv_update-reqs() {
         return 1
     fi
 
+    myenv setup-pip
     python -m piptools compile requirements.in
     python -m pip install -r requirements.txt
 }
