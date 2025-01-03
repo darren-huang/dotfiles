@@ -24,6 +24,7 @@ myenv() {
 }
 
 myenv_setup-pip() {
+    source venv/bin/activate
     python -m pip install --upgrade pip pip-tools
 }
 
@@ -33,6 +34,7 @@ myenv_update-reqs() {
         return 1
     fi
 
+    source venv/bin/activate
     myenv setup-pip
     python -m piptools compile requirements.in
     python -m pip install -r requirements.txt
